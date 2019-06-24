@@ -3,6 +3,7 @@ import TestTwo from './TestTwo';
 import HomeScreen from './HomeScreen';
 import TestOne from './TestOne';
 import TestThree from './TestThree';
+import ApiTest from './ApiTest';
 
 const AppNavigatorOne = createStackNavigator({
   Home: {
@@ -44,13 +45,13 @@ const TabNavigator = createBottomTabNavigator({
 });
 
 const MyDrawerNavigator = createDrawerNavigator({
-  AppNavigator: AppNavigatorOne,
   TabNavigator: TabNavigator,
+  ApiTest:ApiTest
 });
 
 const MySwitchNavigator = createSwitchNavigator({
-  Home1: AppNavigatorOne,
+  Home1: MyDrawerNavigator,
   AppNavigatorThree1: AppNavigatorThree,
 });
 
-export default createAppContainer(TabNavigator);
+export default createAppContainer(MyDrawerNavigator);

@@ -12,23 +12,24 @@ import {addCounterVal, subCounterVal, reset} from "./store/Action"
 
 
 class HomeScreen extends Component {
-	  	constructor() {
+  	constructor() {
  		super();
  		this.state={
  		ColorHolder : '#00BCD4'
  		}
   	}
+
   	async handleLocales() {
   		this.locales = RNLocalize.getLocales();
 	}
 
 	getLocale() {
   		if (this.locales) {
-    	if (Array.isArray(this.locales)) {
-      		return this.locales[0];
-    	}
-  	}
-  	return null;
+	    	if (Array.isArray(this.locales)) {
+	      		return this.locales[0];
+	    	}
+	  	}
+	  	return null;
 	}
  
 	ChangeColorFunction=()=>
@@ -36,7 +37,7 @@ class HomeScreen extends Component {
  		var ColorCode = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
  		this.setState({
  		ColorHolder : ColorCode
- 	})
+ 	});
 	}
  	static navigationOptions = ({ navigation }) => {
     const { state } = navigation
@@ -50,6 +51,7 @@ class HomeScreen extends Component {
 	componentDidMount() {
     	this.props.navigation.setParams({ handleSave: () => this.ChangeColorFunction() })
   	}
+
 	render() {
 	 	return(
 	 		<View style={{justifyContent: "space-around", flex: 1, paddingHorizontal:80, backgroundColor: this.state.ColorHolder}}>
@@ -64,13 +66,16 @@ class HomeScreen extends Component {
 				<Text style={{textAlign:'center', fontSize:30}}>{this.props.reducer.counter}</Text>
     			<CustomButton onPress={()=> this.props.subCounterVal()} title="Decrement" disabled= {this.props.reducer.counter > 0 ? false: true}/>
     			<CustomButton onPress={()=> this.props.reset()} title="Reset"/>
+
+    			<CustomButton onPress={()=> this.props.navigation.openDrawer()} title="API Test"/>
+		 		
 		 		<CustomButton 
-	         	title={I18n.t("TestTwo")}
-	         	onPress={() => this.props.navigation.navigate("SecondScreen")}
+		         	title={I18n.t("TestTwo")}
+		         	onPress={() => this.props.navigation.navigate("SecondScreen")}
 	        	/>
 		 		<CustomButton 
-	         	title={I18n.t("TestThree")}
-	         	onPress={() => this.props.navigation.navigate("ThirdScreen")}
+		         	title={I18n.t("TestThree")}
+		         	onPress={() => this.props.navigation.navigate("ThirdScreen")}
 	        	/>
 	        </View>
 	 	);
